@@ -14,7 +14,7 @@ run: go-run
 
 # Checks if there is any missing dependency
 # and then proceeds to build the go binary.
-build: go-get go-build
+build: go-build
 
 # init initializaes a new go modeule for the project
 init: go-mod
@@ -22,6 +22,7 @@ init: go-mod
 # Clean the files created by the build rule.
 clean: go-clean
 	@rm -rf $(GOBIN)
+	@rm -rf $(GOBASE)/vendor
 
 # Go Related rules
 go-mod:
