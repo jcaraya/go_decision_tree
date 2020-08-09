@@ -8,7 +8,7 @@ GOCMD=$(GOBASE)/cmd
 GOPKG := $(shell find $(GOBASE)/pkg -name *.go)
 
 # Make is verbose in Linux. Make it silent.
-# MAKEFLAGS += --silent
+MAKEFLAGS += --silent
 
 # Execute the the application binary.
 run: go-run
@@ -16,9 +16,10 @@ run: go-run
 # Builds the go binary.
 build: go-build
 
+# Compiles the library code stored in pkg.
 build-pkg: go-build-pkg
 
-# init initializaes a new go modeule for the project
+# init initializaes a new go module for the project.
 init: go-mod
 
 # Clean the files created by the build rule.
