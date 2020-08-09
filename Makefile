@@ -4,17 +4,19 @@ PROJECTNAME := $(shell basename "$(PWD)")
 GOBASE=$(shell pwd)
 GOPATH=$(GOBASE)/vendor:$(GOBASE)
 GOBIN=$(GOBASE)/bin
-GOMAIN=$(GOBASE)/cmd
+GOCMD=$(GOBASE)/cmd
+GOPKG := $(shell find $(GOBASE)/pkg -name *.go)
 
 # Make is verbose in Linux. Make it silent.
-MAKEFLAGS += --silent
+# MAKEFLAGS += --silent
 
 # Execute the the application binary.
 run: go-run
 
-# Checks if there is any missing dependency
-# and then proceeds to build the go binary.
+# Builds the go binary.
 build: go-build
+
+build-pkg: go-build-pkg
 
 # init initializaes a new go modeule for the project
 init: go-mod
@@ -31,17 +33,21 @@ go-mod:
 
 go-get:
 	@echo "  >  Checking missing dependencies..."
-	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go get $(GOMAIN)
+	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go get $(GOCMD)
 
 go-build:
 	@echo "  >  Building binary..."
-	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go build $(LDFLAGS) -o $(GOBIN)/$(PROJECTNAME) $(GOMAIN)
+	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go build $(LDFLAGS) -o $(GOBIN)/$(PROJECTNAME) $(GOCMD)
+
+go-build-pkg:
+	@echo "  >  Building pkg..."
+	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go build $(LDFLAGS) $(GOPKG)
 
 go-install:
-	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go install $(GOMAIN)
+	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go install $(GOCMD)
 
 go-run:
-	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go run $(GOMAIN)
+	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go run $(GOCMD)
 
 go-clean:
 	@echo "  >  Cleaning build cache"
