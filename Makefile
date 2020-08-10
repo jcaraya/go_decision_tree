@@ -14,10 +14,13 @@ MAKEFLAGS += --silent
 run: go-run
 
 # Builds the go binary.
-build: go-build
+build-binary: go-build
 
 # Compiles the library code stored in pkg.
-build-pkg: go-build-pkg
+build: go-build-pkg
+
+# Executes all the tests in the pkg folder.
+test: go-test-pkg
 
 # Initializaes a new go module for the project.
 init: go-mod
@@ -43,6 +46,9 @@ go-build:
 go-build-pkg:
 	@echo "  >  Building pkg..."
 	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go build $(LDFLAGS) $(GOPKG)
+
+go-test-pkg:
+	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go test $(LDFLAGS) $(GOPKG)
 
 go-install:
 	@GOPATH=$(GOPATH) GOBIN=$(GOBIN) go install $(GOCMD)

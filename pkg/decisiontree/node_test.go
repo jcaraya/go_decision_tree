@@ -1,6 +1,8 @@
 package decisiontree
 
-import "testing"
+import (
+	"testing"
+)
 
 // Validates thecorrect initialization of a leaf node.
 func TestNode_Leaf(t *testing.T) {
