@@ -5,7 +5,7 @@ GOBASE=$(shell pwd)
 GOPATH=$(GOBASE)/vendor:$(GOBASE)
 GOBIN=$(GOBASE)/bin
 GOCMD=$(GOBASE)/cmd
-GOPKG := $(shell find $(GOBASE)/pkg -name *.go)
+GOPKG := $(shell find $(GOBASE)/pkg -maxdepth 1 -mindepth 1)
 
 # Make is verbose in Linux. Make it silent.
 MAKEFLAGS += --silent
@@ -19,7 +19,7 @@ build: go-build
 # Compiles the library code stored in pkg.
 build-pkg: go-build-pkg
 
-# init initializaes a new go module for the project.
+# Initializaes a new go module for the project.
 init: go-mod
 
 # Clean the files created by the build rule.
