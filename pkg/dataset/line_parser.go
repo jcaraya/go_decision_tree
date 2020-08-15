@@ -1,9 +1,12 @@
-package irisparser
+package dataset
 
 import "strconv"
 
-const attributeCount = 4
-const categoryPosition = 4
+// Constants realted to the expected components of a CSV line.
+const (
+	attributeCount   = 4
+	categoryPosition = 4
+)
 
 // ParseCsvLines receives the lines read from the csv file and returns
 // the corresponding features, classes and a mapping of the class to integer.

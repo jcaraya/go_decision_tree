@@ -1,4 +1,4 @@
-package irisparser
+package dataset
 
 import (
 	"reflect"
