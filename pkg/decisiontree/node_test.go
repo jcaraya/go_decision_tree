@@ -30,8 +30,8 @@ func TestNode_Regular(t *testing.T) {
 
 	left := &Node{}
 	right := &Node{}
-	decisionFunction := func(value int) bool {
-		return value > 10
+	decisionFunction := func(value interface{}) bool {
+		return value.(int) > 10
 	}
 
 	// Function under test.

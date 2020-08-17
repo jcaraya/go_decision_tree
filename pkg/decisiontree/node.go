@@ -1,7 +1,7 @@
 package decisiontree
 
 // DecisionFunction function used to determine the next node.
-type DecisionFunction func(int) bool
+type DecisionFunction func(interface{}) bool
 
 // Node contains the information of a regular or leaf node.
 type Node struct {
@@ -48,16 +48,16 @@ func (b *Node) LeafValue() int {
 }
 
 // NextNode receives a value and returns the next corresponding node.
-func (b *Node) NextNode(value int) *Node {
+func (b *Node) NextNode(value interface{}) *Node {
 	// Validate the desicion function was assigned.
 	if b.decisionFunction == nil {
 		return nil
 	}
 
 	// Use the decision function to determine the next node.
-	if !b.decisionFunction(value) {
-		return b.left
+	if b.decisionFunction(value) {
+		return b.right
 	}
 
-	return b.right
+	return b.left
 }

@@ -5,23 +5,9 @@ import (
 	"time"
 )
 
-// makeRange creates a slice of integers from zero to max-1.
-func makeRange(max int) []int {
-	if max < 0 {
-		return []int{}
-	}
-
-	r := make([]int, max)
-	for i := range r {
-		r[i] = i
-	}
-
-	return r
-}
-
 // makeShuffledRange creates a range from zero to max-1
 func makeShuffledRange(max int) []int {
-	r := makeRange(max)
+	r := MakeRange(max)
 	rand.Seed(time.Now().UnixNano())
 	rand.Shuffle(len(r), func(i, j int) { r[i], r[j] = r[j], r[i] })
 	return r

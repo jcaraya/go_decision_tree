@@ -27,8 +27,7 @@ func main() {
 
 	// Partition the data
 	xTrain, yTrain := x[:90], y[:90]
-	_ = xTrain
-	_ = yTrain
+	trainDataset := dataset.NewDataset(xTrain, yTrain)
 
 	xValidation, yValidation := x[90:120], y[90:120]
 	_ = xValidation
